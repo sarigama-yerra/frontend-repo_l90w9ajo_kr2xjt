@@ -85,14 +85,14 @@ export default function Dashboard(){
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#F7F2FA,white)] text-slate-900">
-      <div className="relative h-[140px] sm:h-[220px] md:h-[280px]">
+      <div className="relative h-[88px] sm:h-[120px] md:h-[160px]">
         <Spline scene="https://prod.spline.design/8nsoLg1te84JZcE9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
         <div className="absolute inset-0" style={{background:'linear-gradient(180deg, rgba(247,242,250,0.9) 0%, rgba(247,242,250,0.85) 50%, rgba(255,255,255,1) 100%)'}} />
-        <header className="absolute top-0 left-0 right-0 p-3 md:p-5">
-          <div className="mx-auto max-w-[1280px] flex items-center justify-between gap-3">
+        <header className="absolute top-0 left-0 right-0 p-2 md:p-4">
+          <div className="mx-auto max-w-[1280px] flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <button className="p-2 md:hidden" aria-label="Toggle Sidebar" onClick={()=>setSidebarOpen(s=>!s)}><Menu /></button>
-              <div className="font-extrabold text-lg md:text-xl tracking-tight text-[#F24AA7]">DigitalPay</div>
+              <div className="font-extrabold text-base md:text-xl tracking-tight text-[#F24AA7]">DigitalPay</div>
               <Badge color="role" className="hidden sm:inline-flex">{role}</Badge>
             </div>
             <div className="hidden md:flex items-center gap-3 w-[560px]">
@@ -111,9 +111,9 @@ export default function Dashboard(){
         </header>
       </div>
 
-      <div className="mx-auto max-w-[1280px] px-4 md:px-6 -mt-12 md:-mt-16 pb-24">
+      <div className="mx-auto max-w-[1280px] px-4 md:px-6 -mt-8 md:-mt-12 pb-24">
         {/* Compact toolbar below header to avoid oversized navbar */}
-        <div className="mb-4 flex flex-wrap items-center gap-3 justify-between">
+        <div className="mb-3 flex flex-wrap items-center gap-3 justify-between">
           <div className="flex items-center gap-3">
             <span className="text-slate-600">Peran:</span>
             <Select value={role} onChange={e=>setRole(e.target.value)} aria-label="Role Switcher">
