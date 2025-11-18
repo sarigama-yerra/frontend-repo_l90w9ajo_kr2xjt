@@ -7,7 +7,7 @@ export function cx(...classes) {
 
 // Soft, creamy, cute theme tokens
 export const tokens = {
-  radius: 'rounded-2xl',
+  radius: 'rounded-xl', // 12px radius per spec
   shadow: 'shadow-[0_10px_30px_rgba(242,74,167,0.12)]', // soft pink glow
   cardBg: 'bg-[#F7F2FA]',
   border: 'border border-[#ECDFF2]',
@@ -26,7 +26,7 @@ export function Button({
   children,
   ...props
 }) {
-  const base = cx('inline-flex items-center justify-center gap-2 font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed', tokens.radius, tokens.ring)
+  const base = cx('inline-flex items-center justify-center gap-2 font-medium transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed', tokens.radius, tokens.ring)
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
     md: 'px-4 py-2 text-sm',
@@ -122,7 +122,7 @@ export function Toggle({ checked, onChange, label }) {
 
 export function Table({ columns = [], data = [], onRowClick, empty, loading, error }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#ECDFF2]">
+    <div className="overflow-hidden rounded-xl border border-[#ECDFF2]">
       <div className="overflow-auto">
         <table className="min-w-full divide-y divide-[#ECDFF2]">
           <thead className="sticky top-0 z-10" style={{ background: '#F7F2FA' }}>

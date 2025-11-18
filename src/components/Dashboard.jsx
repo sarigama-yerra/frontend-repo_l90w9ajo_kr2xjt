@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Search, Bell, Menu, ChevronDown, Download, Plus, Settings, Banknote, Wallet2, LineChart, Activity, Server, Clock, Zap, CheckCircle2 } from 'lucide-react'
 import { Button, Badge, Card, Input, Select, Toggle, Table, Modal, Drawer, Toast, cx } from './UI'
+import { SalesLineChart, CandlesChart } from './Charts'
 
 const ROLES = ['Reseller','Admin','Investor','Engineer','High Admin','Owner']
 
@@ -55,6 +56,7 @@ export default function Dashboard(){
   const [drawerTx, setDrawerTx] = useState(null)
   const [modalPayout, setModalPayout] = useState(false)
   const [toast, setToast] = useState({ open:false, type:'success', message:'' })
+  const [metricMode, setMetricMode] = useState('Gross')
 
   const metrics = useMemo(() => {
     const todaySales = transactions.filter(t => t.status==='Paid').reduce((a,b)=>a+b.price,0)
@@ -229,7 +231,7 @@ export default function Dashboard(){
             <Section when={current==='sales'}>
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <Select aria-label="Toggle Metric">
+                  <Select aria-label="Toggle Metric" value={metricMode} onChange={(e)=>setMetricMode(e.target.value)}>
                     <option>Gross</option>
                     <option>Net</option>
                     <option>Unit</option>
@@ -263,9 +265,15 @@ export default function Dashboard(){
                 </div>
               </div>
               <Card variant="bento" tone="cream">
-                <div className="h-40 rounded-2xl mb-4 flex items-center justify-center text-slate-500" style={{background:'linear-gradient(90deg,#F9A8D4 0%, #A9D5F9 100%)',opacity:0.25}}>
-                  Chart (30 hari)
+                <div className="grid grid-cols-12 gap-4">
+                  <div className="col-span-12 lg:col-span-8">
+                    <SalesLineChart mode={metricMode} />
+                  </div>
+                  <div className="col-span-12 lg:col-span-4">
+                    <CandlesChart />
+                  </div>
                 </div>
+                <div className="mt-4" />
                 <Table
                   columns={[
                     {key:'datetime', header:'Tanggal/Waktu'},
