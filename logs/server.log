@@ -1,0 +1,11 @@
+
+> vibe-generated-app@1.0.0 dev
+> vite
+
+
+  VITE v5.4.20  ready in 307 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://172.20.62.136:3000/
+8:12:31 AM [vite] Pre-transform error: Transform failed with 1 error:
+/home/workspace/src/components/Dashboard.jsx:263:26: ERROR: Expected "{" but found "["
