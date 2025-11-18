@@ -3,12 +3,12 @@
 > vite
 
 
-  VITE v5.4.20  ready in 193 ms
+  VITE v5.4.20  ready in 189 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.62.136:3000/
-9:45:52 AM [vite] Pre-transform error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
-9:45:55 AM [vite] Internal server error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
+9:54:18 AM [vite] Pre-transform error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
+9:54:20 AM [vite] Internal server error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
   Plugin: vite:import-analysis
   File: /home/workspace/src/components/Charts.jsx:1:27
   1  |  import { jsxDEV } from "react/jsx-dev-runtime";
@@ -26,7 +26,43 @@
       at async PluginContainer.transform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49099:18)
       at async loadAndTransform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:51977:27)
       at async viteTransformMiddleware (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:62105:24)
-9:45:55 AM [vite] Internal server error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
+9:54:20 AM [vite] Internal server error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/workspace/src/components/Charts.jsx:1:27
+  1  |  import { jsxDEV } from "react/jsx-dev-runtime";
+  2  |  import ReactApexChart from "react-apexcharts";
+     |                              ^
+  3  |  export function SalesLineChart({ mode = "Gross" }) {
+  4  |    const colors = {
+      at TransformPluginContext._formatError (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49258:41)
+      at TransformPluginContext.error (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49253:16)
+      at normalizeUrl (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64306:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64438:39
+      at async Promise.all (index 1)
+      at async TransformPluginContext.transform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64365:7)
+      at async PluginContainer.transform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49099:18)
+      at async loadAndTransform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:51977:27)
+      at async viteTransformMiddleware (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:62105:24)
+9:54:35 AM [vite] Internal server error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/workspace/src/components/Charts.jsx:1:27
+  1  |  import { jsxDEV } from "react/jsx-dev-runtime";
+  2  |  import ReactApexChart from "react-apexcharts";
+     |                              ^
+  3  |  export function SalesLineChart({ mode = "Gross" }) {
+  4  |    const colors = {
+      at TransformPluginContext._formatError (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49258:41)
+      at TransformPluginContext.error (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49253:16)
+      at normalizeUrl (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64306:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64438:39
+      at async Promise.all (index 1)
+      at async TransformPluginContext.transform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64365:7)
+      at async PluginContainer.transform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49099:18)
+      at async loadAndTransform (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:51977:27)
+      at async viteTransformMiddleware (file:///home/workspace/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:62105:24)
+9:54:45 AM [vite] Internal server error: Failed to resolve import "react-apexcharts" from "src/components/Charts.jsx". Does the file exist?
   Plugin: vite:import-analysis
   File: /home/workspace/src/components/Charts.jsx:1:27
   1  |  import { jsxDEV } from "react/jsx-dev-runtime";
