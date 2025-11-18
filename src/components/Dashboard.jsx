@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Spline from '@splinetool/react-spline'
-import { Search, Bell, Menu, ChevronDown, Download, Plus, Filter, Settings, Shield, Banknote, Wallet2, LineChart, Activity, Server, Clock, Zap, CheckCircle2, XCircle, CircleHelp, ExternalLink } from 'lucide-react'
-import { Button, Badge, Card, Input, Select, Toggle, Table, Modal, Drawer, Skeleton, Toast, cx, tokens } from './UI'
+import { Search, Bell, Menu, ChevronDown, Download, Plus, Settings, Banknote, Wallet2, LineChart, Activity, Server, Clock, Zap, CheckCircle2 } from 'lucide-react'
+import { Button, Badge, Card, Input, Select, Toggle, Table, Modal, Drawer, Toast, cx } from './UI'
 
 const ROLES = ['Reseller','Admin','Investor','Engineer','High Admin','Owner']
 
@@ -84,15 +84,15 @@ export default function Dashboard(){
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
-      <div className="relative h-[360px] sm:h-[420px]">
+    <div className="min-h-screen bg-[linear-gradient(180deg,#F7F2FA,white)] text-slate-900">
+      <div className="relative h-[320px] sm:h-[380px]">
         <Spline scene="https://prod.spline.design/8nsoLg1te84JZcE9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white dark:from-slate-950/40 dark:via-slate-950/70 dark:to-slate-950 pointer-events-none" />
+        <div className="absolute inset-0" style={{background:'linear-gradient(180deg, rgba(247,242,250,0.9) 0%, rgba(247,242,250,0.85) 50%, rgba(255,255,255,1) 100%)'}} />
         <header className="absolute top-0 left-0 right-0 p-4 md:p-6">
-          <div className="mx-auto max-w-[1400px] flex items-center justify-between gap-4">
+          <div className="mx-auto max-w-[1280px] flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <button className="p-2 md:hidden" aria-label="Toggle Sidebar" onClick={()=>setSidebarOpen(s=>!s)}><Menu /></button>
-              <div className="font-bold text-xl">DigitalPay</div>
+              <div className="font-extrabold text-xl tracking-tight text-[#F24AA7]">DigitalPay</div>
               <Badge color="role">{role}</Badge>
             </div>
             <div className="hidden md:flex items-center gap-3 w-[560px]">
@@ -101,16 +101,16 @@ export default function Dashboard(){
                 <Input placeholder="Cari transaksi, produk, pengguna..." className="pl-9" aria-label="Search" />
               </div>
               <Button variant="secondary" aria-label="Notifications"><Bell className="h-4 w-4" /></Button>
-              <div className="flex items-center gap-2 px-2 py-1.5 bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 rounded-lg">
-                <div className="h-7 w-7 bg-gradient-to-br from-teal-500 to-blue-500 rounded-full" aria-hidden />
+              <div className="flex items-center gap-2 px-2 py-1.5 bg-[#F7F2FA] border border-[#ECDFF2] rounded-2xl">
+                <div className="h-7 w-7 rounded-full" style={{background:'linear-gradient(135deg,#F24AA7,#A9D5F9)'}} aria-hidden />
                 <span className="text-sm">Akun</span>
                 <ChevronDown className="h-4 w-4" aria-hidden />
               </div>
             </div>
           </div>
-          <div className="mx-auto max-w-[1400px] mt-6">
+          <div className="mx-auto max-w-[1280px] mt-6">
             <div className="flex items-center gap-3">
-              <span className="text-slate-600 dark:text-slate-300">Peran:</span>
+              <span className="text-slate-600">Peran:</span>
               <Select value={role} onChange={e=>setRole(e.target.value)} aria-label="Role Switcher">
                 {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
               </Select>
@@ -120,57 +120,58 @@ export default function Dashboard(){
         </header>
       </div>
 
-      <div className="mx-auto max-w-[1400px] px-4 md:px-6 -mt-28 pb-24">
+      <div className="mx-auto max-w-[1280px] px-4 md:px-6 -mt-24 pb-24">
         <div className="flex gap-6">
-          <aside className={cx('hidden md:block w-64 flex-shrink-0', !sidebarOpen && 'md:w-16')}
+          <aside className={cx('hidden md:block w-64 flex-shrink-0')}
             aria-label="Sidebar">
-            <Card className="p-2">
+            <Card variant="bento" tone="cream" className="p-2">
               {navItems.filter(i=>i.roles.includes(role)).map(i => (
                 <button key={i.key} onClick={()=>setCurrent(i.key)}
-                  className={cx('w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-slate-100 dark:hover:bg-slate-800', current===i.key && 'bg-slate-100 dark:bg-slate-800 font-semibold')}>{i.label}</button>
+                  className={cx('w-full text-left px-3 py-2 rounded-xl text-sm hover:bg-[#FFF6FB]', current===i.key && 'bg-[#F9A8D4]/60 font-semibold')}>{i.label}</button>
               ))}
             </Card>
           </aside>
 
           <main className="flex-1 min-w-0">
             <Section when={current==='overview'}>
+              {/* Bento grid */}
               <div className="grid grid-cols-12 gap-4">
-                <Card className="col-span-12 lg:col-span-4">
+                <Card variant="bento" tone="pink" className="col-span-12 lg:col-span-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-slate-600 text-sm">Total Penjualan Hari Ini</h2>
+                      <h2 className="text-slate-700 text-sm">Total Penjualan Hari Ini</h2>
                       <div className="text-2xl font-bold">{formatRp(metrics.today)}</div>
                     </div>
-                    <LineChart className="text-teal-600" />
+                    <LineChart className="text-rose-700" />
                   </div>
-                  <div className="mt-3 text-sm text-slate-500">Bulan ini: {formatRp(metrics.month)}</div>
+                  <div className="mt-3 text-sm text-slate-700">Bulan ini: {formatRp(metrics.month)}</div>
                 </Card>
 
                 {can(role,'financeMetrics') && (
-                  <Card className="col-span-12 lg:col-span-4">
+                  <Card variant="bento" tone="mint" className="col-span-12 lg:col-span-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h2 className="text-slate-600 text-sm">MRR</h2>
+                        <h2 className="text-slate-700 text-sm">MRR</h2>
                         <div className="text-2xl font-bold">{formatRp(metrics.mrr)}</div>
                       </div>
-                      <Activity className="text-teal-600" />
+                      <Activity className="text-emerald-700" />
                     </div>
-                    <div className="mt-3 text-sm text-slate-500">Revenue bulan ini: {formatRp(metrics.month)}</div>
+                    <div className="mt-3 text-sm text-slate-700">Revenue bulan ini: {formatRp(metrics.month)}</div>
                   </Card>
                 )}
 
-                <Card className="col-span-12 lg:col-span-4">
+                <Card variant="bento" tone="blue" className="col-span-12 lg:col-span-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-slate-600 text-sm">Saldo Tersedia</h2>
+                      <h2 className="text-slate-700 text-sm">Saldo Tersedia</h2>
                       <div className="text-2xl font-bold">{role==='Reseller' ? formatRp(1250000) : formatRp(42800000)}</div>
                     </div>
-                    <Wallet2 className="text-teal-600" />
+                    <Wallet2 className="text-sky-800" />
                   </div>
                   {role==='Reseller' ? (
                     <div className="mt-3">
                       <Button onClick={()=>setModalPayout(true)}>Ajukan Pencairan</Button>
-                      <p className="text-xs text-slate-500 mt-2">Dana tersedia 5 hari setelah pengajuan untuk mitigasi chargeback.</p>
+                      <p className="text-xs text-slate-700 mt-2">Dana tersedia 5 hari setelah pengajuan untuk mitigasi chargeback.</p>
                     </div>
                   ) : can(role,'instantPayout') ? (
                     <div className="mt-3">
@@ -180,25 +181,25 @@ export default function Dashboard(){
                 </Card>
 
                 {can(role,'systemView') && (
-                  <Card className="col-span-12 lg:col-span-4">
+                  <Card variant="bento" tone="lime" className="col-span-12 lg:col-span-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h2 className="text-slate-600 text-sm">Incident Open</h2>
+                        <h2 className="text-slate-700 text-sm">Incident Open</h2>
                         <div className="text-2xl font-bold">2</div>
                       </div>
-                      <Server className="text-teal-600" />
+                      <Server className="text-emerald-800" />
                     </div>
-                    <div className="mt-3 text-sm text-slate-500">Queue provisioning: 3, Webhook: Normal</div>
+                    <div className="mt-3 text-sm text-slate-700">Queue provisioning: 3, Webhook: Normal</div>
                   </Card>
                 )}
 
-                <Card className="col-span-12 lg:col-span-4">
+                <Card variant="bento" tone="cream" className="col-span-12 lg:col-span-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-slate-600 text-sm">Auto Payment</h2>
+                      <h2 className="text-slate-700 text-sm">Auto Payment</h2>
                       <div className="text-2xl font-bold">Operational</div>
                     </div>
-                    <Zap className="text-teal-600" />
+                    <Zap className="text-rose-700" />
                   </div>
                   <div className="mt-3 flex items-center gap-3">
                     <Badge color="paid">Uptime 99.97%</Badge>
@@ -206,15 +207,15 @@ export default function Dashboard(){
                   </div>
                 </Card>
 
-                <Card className="col-span-12 lg:col-span-4">
+                <Card variant="bento" tone="hotpink" className="col-span-12 lg:col-span-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-slate-600 text-sm">Funnel Konversi</h2>
-                      <div className="text-2xl font-bold">3.2%</div>
+                      <h2 className="text-white/90 text-sm">Funnel Konversi</h2>
+                      <div className="text-2xl font-bold text-white">3.2%</div>
                     </div>
-                    <LineChart className="text-teal-600" />
+                    <LineChart className="text-white" />
                   </div>
-                  <div className="mt-3 text-sm text-slate-500">Trial → Paid ratio 1:5</div>
+                  <div className="mt-3 text-sm text-white/90">Trial → Paid ratio 1:5</div>
                 </Card>
               </div>
             </Section>
@@ -255,8 +256,8 @@ export default function Dashboard(){
                   {can(role,'manageProducts') && <Button variant="tertiary"><Settings className="h-4 w-4" /> Kelola Harga</Button>}
                 </div>
               </div>
-              <Card>
-                <div className="h-40 bg-gradient-to-r from-teal-100 to-blue-100 dark:from-teal-900/30 dark:to-blue-900/30 rounded-lg mb-4 flex items-center justify-center text-slate-500">
+              <Card variant="bento" tone="cream">
+                <div className="h-40 rounded-2xl mb-4 flex items-center justify-center text-slate-500" style={{background:'linear-gradient(90deg,#F9A8D4 0%, #A9D5F9 100%)',opacity:0.25}}>
                   Chart (30 hari)
                 </div>
                 <Table
@@ -272,7 +273,7 @@ export default function Dashboard(){
                       return <Badge color={map[v] || 'default'}>{v}</Badge>
                     }},
                     {key:'method', header:'Metode'},
-                    {key:'trx', header:'Aksi', render:(v)=> <span className="text-teal-600 hover:underline">Detail</span> },
+                    {key:'trx', header:'Aksi', render:()=> <span className="text-[#F24AA7] hover:underline">Detail</span> },
                   ]}
                   data={transactions}
                   onRowClick={(row)=>setDrawerTx(row)}
@@ -289,22 +290,22 @@ export default function Dashboard(){
                   { name:'e-Wallet', uptime:'99.95%', latency:'2.4s' },
                   { name:'CC', uptime:'99.87%', latency:'3.1s' },
                 ].map(g => (
-                  <Card key={g.name} className="col-span-12 md:col-span-6 xl:col-span-3">
+                  <Card key={g.name} variant="bento" tone="cream" className="col-span-12 md:col-span-6 xl:col-span-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-semibold">{g.name}</h3>
-                        <p className="text-sm text-slate-500">Uptime {g.uptime} • p95 {g.latency}</p>
+                        <p className="text-sm text-slate-600">Uptime {g.uptime} • p95 {g.latency}</p>
                       </div>
-                      <CheckCircle2 className="text-teal-600" />
+                      <CheckCircle2 className="text-emerald-700" />
                     </div>
                   </Card>
                 ))}
               </div>
-              <Card className="mt-4">
+              <Card variant="bento" tone="blue" className="mt-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Toggle checked={autoCapture} onChange={()=>setAutoCapture(v=>!v)} label="Auto-capture" />
-                    <span className="text-slate-400 text-sm" title="Pembayaran otomatis menandai transaksi ‘Paid’ saat gateway konfirmasi.">ⓘ Pembayaran otomatis menandai transaksi ‘Paid’ saat gateway konfirmasi.</span>
+                    <span className="text-slate-600 text-sm" title="Pembayaran otomatis menandai transaksi ‘Paid’ saat gateway konfirmasi.">ⓘ Pembayaran otomatis menandai transaksi ‘Paid’ saat gateway konfirmasi.</span>
                   </div>
                   {can(role,'systemView') && <Button variant="secondary">Webhook Retry</Button>}
                 </div>
@@ -326,12 +327,12 @@ export default function Dashboard(){
 
             <Section when={current==='payouts'}>
               {role==='Reseller' && (
-                <Card className="mb-4">
+                <Card variant="bento" tone="cream" className="mb-4">
                   <div className="flex items-start gap-3">
                     <Clock className="text-amber-500 mt-0.5" />
                     <div>
                       <p className="font-semibold">Pencairan diproses setelah 5 hari dari tanggal pengajuan (T+5).</p>
-                      <p className="text-sm text-slate-500">Dana tersedia 5 hari setelah pengajuan untuk mitigasi chargeback.</p>
+                      <p className="text-sm text-slate-600">Dana tersedia 5 hari setelah pengajuan untuk mitigasi chargeback.</p>
                     </div>
                   </div>
                 </Card>
@@ -339,17 +340,17 @@ export default function Dashboard(){
 
               {role==='Reseller' ? (
                 <div className="grid grid-cols-12 gap-4">
-                  <Card className="col-span-12 md:col-span-5">
+                  <Card variant="bento" tone="mint" className="col-span-12 md:col-span-5">
                     <h3 className="font-semibold mb-3">Ajukan Pencairan</h3>
                     <div className="space-y-3">
                       <Input type="number" placeholder="Amount (Rp)" aria-label="Amount" />
                       <Input placeholder="Rekening/e-Wallet" aria-label="Rekening" />
                       <Input placeholder="Catatan (opsional)" aria-label="Catatan" />
                       <Button onClick={()=>setToast({open:true, type:'success', message:'Pengajuan terkirim'})}>Ajukan</Button>
-                      <p className="text-xs text-slate-500">Minimal Rp50.000. Pastikan saldo cukup dan rekening valid.</p>
+                      <p className="text-xs text-slate-700">Minimal Rp50.000. Pastikan saldo cukup dan rekening valid.</p>
                     </div>
                   </Card>
-                  <Card className="col-span-12 md:col-span-7">
+                  <Card variant="bento" tone="cream" className="col-span-12 md:col-span-7">
                     <h3 className="font-semibold mb-3">Daftar Pengajuan</h3>
                     <Table
                       columns={[
@@ -364,7 +365,7 @@ export default function Dashboard(){
                   </Card>
                 </div>
               ) : (
-                <Card>
+                <Card variant="bento" tone="cream">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <Select aria-label="Filter Role">
@@ -388,7 +389,7 @@ export default function Dashboard(){
                       {key:'submitted', header:'Diajukan'},
                       {key:'eta', header:'Estimasi'},
                       {key:'status', header:'Status'},
-                      {key:'proof', header:'Bukti', render:(v)=> v? <a href="#" className="text-teal-600">Lihat</a> : '-' },
+                      {key:'proof', header:'Bukti', render:(v)=> v? <a href="#" className="text-[#F24AA7]">Lihat</a> : '-' },
                       {key:'action', header:'Aksi', render:(_,row)=> can(role,'instantPayout') ? (
                         <div className="flex items-center gap-2">
                           <Button size="sm" onClick={()=>setToast({open:true,type:'success',message:'Dibayar instan'})}>Cairkan Sekarang</Button>
@@ -404,7 +405,7 @@ export default function Dashboard(){
             </Section>
 
             <Section when={current==='products' && can(role,'manageProducts')}>
-              <Card>
+              <Card variant="bento" tone="cream">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-semibold">Kelola Produk</h3>
                   <Button><Plus className="h-4 w-4" /> Tambah Produk</Button>
@@ -422,17 +423,17 @@ export default function Dashboard(){
 
             <Section when={current==='system' && can(role,'systemView')}>
               <div className="grid grid-cols-12 gap-4">
-                <Card className="col-span-12 md:col-span-4">
+                <Card variant="bento" tone="mint" className="col-span-12 md:col-span-4">
                   <h3 className="font-semibold mb-1">Uptime</h3>
-                  <p className="text-sm text-slate-500">99.97% 30 hari</p>
+                  <p className="text-sm text-slate-700">99.97% 30 hari</p>
                 </Card>
-                <Card className="col-span-12 md:col-span-4">
+                <Card variant="bento" tone="pink" className="col-span-12 md:col-span-4">
                   <h3 className="font-semibold mb-1">Incidents</h3>
-                  <p className="text-sm text-slate-500">2 open • 14 resolved</p>
+                  <p className="text-sm text-slate-700">2 open • 14 resolved</p>
                 </Card>
-                <Card className="col-span-12 md:col-span-4">
+                <Card variant="bento" tone="blue" className="col-span-12 md:col-span-4">
                   <h3 className="font-semibold mb-1">Webhook Status</h3>
-                  <p className="text-sm text-slate-500">Normal • 0 retry queued</p>
+                  <p className="text-sm text-slate-700">Normal • 0 retry queued</p>
                 </Card>
               </div>
             </Section>
@@ -455,14 +456,14 @@ export default function Dashboard(){
                   {(role!=='Reseller') && <Button variant="secondary"><Download className="h-4 w-4" /> Export</Button>}
                 </div>
               </div>
-              <Card>
+              <Card variant="bento" tone="cream">
                 <div className="space-y-3">
                   {logs.map((l,idx)=> (
                     <div key={idx} className="flex items-start gap-3">
-                      <div className="text-xs text-slate-500 w-44">{l.time}</div>
+                      <div className="text-xs text-slate-600 w-44">{l.time}</div>
                       <Badge color="default">{l.cat}</Badge>
                       <div className="flex-1">
-                        <span className="font-medium">{l.actor}</span> — <span className="text-slate-700 dark:text-slate-300">{l.desc}</span> <a href="#" className="text-teal-600">{l.ref}</a>
+                        <span className="font-medium">{l.actor}</span> — <span className="text-slate-700">{l.desc}</span> <a href="#" className="text-[#F24AA7]">{l.ref}</a>
                       </div>
                     </div>
                   ))}
@@ -483,9 +484,9 @@ export default function Dashboard(){
             </Section>
 
             <Section when={current==='users' && can(role,'manageUsers')}>
-              <Card>
+              <Card variant="bento" tone="cream">
                 <h3 className="font-semibold mb-2">Role & Permissions</h3>
-                <p className="text-sm text-slate-500">Kelola akses peran dan kebijakan pencairan (default T+5).</p>
+                <p className="text-sm text-slate-600">Kelola akses peran dan kebijakan pencairan (default T+5).</p>
                 <div className="mt-3 flex items-center gap-2">
                   <Select>
                     {ROLES.map(r => <option key={r}>{r}</option>)}
@@ -500,9 +501,9 @@ export default function Dashboard(){
             </Section>
 
             <Section when={current==='settings' && (can(role,'settings') || role==='Reseller')}>
-              <Card>
+              <Card variant="bento" tone="cream">
                 <h3 className="font-semibold mb-2">Settings</h3>
-                <p className="text-sm text-slate-500">Preferensi akun dan kebijakan platform.</p>
+                <p className="text-sm text-slate-600">Preferensi akun dan kebijakan platform.</p>
               </Card>
             </Section>
           </main>
@@ -514,7 +515,7 @@ export default function Dashboard(){
           <div>
             <div className="mb-4">
               <div className="font-semibold">{drawerTx.product} — {drawerTx.trx}</div>
-              <div className="text-sm text-slate-500">{drawerTx.datetime} • {drawerTx.method}</div>
+              <div className="text-sm text-slate-600">{drawerTx.datetime} • {drawerTx.method}</div>
             </div>
             <div className="space-y-3">
               <div>
