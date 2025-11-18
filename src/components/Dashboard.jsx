@@ -260,7 +260,7 @@ export default function Dashboard(){
                   Chart (30 hari)
                 </div>
                 <Table
-                  columns=[
+                  columns={[
                     {key:'datetime', header:'Tanggal/Waktu'},
                     {key:'product', header:'Produk'},
                     {key:'reseller', header:'Reseller'},
@@ -273,7 +273,7 @@ export default function Dashboard(){
                     }},
                     {key:'method', header:'Metode'},
                     {key:'trx', header:'Aksi', render:(v)=> <span className="text-teal-600 hover:underline">Detail</span> },
-                  ]
+                  ]}
                   data={transactions}
                   onRowClick={(row)=>setDrawerTx(row)}
                   empty="Belum ada penjualan. Mulai dengan tambah produk atau undang reseller."
@@ -311,13 +311,13 @@ export default function Dashboard(){
                 <div className="mt-4">
                   <h4 className="font-semibold mb-2">Pembayaran Terakhir</h4>
                   <Table
-                    columns=[
+                    columns={[
                       {key:'trx', header:'ID Transaksi'},
                       {key:'method', header:'Metode'},
                       {key:'price', header:'Amount', render:(v)=>formatRp(v)},
                       {key:'status', header:'Status'},
                       {key:'datetime', header:'Waktu'},
-                    ]
+                    ]}
                     data={transactions.slice(0,4)}
                   />
                 </div>
@@ -352,13 +352,13 @@ export default function Dashboard(){
                   <Card className="col-span-12 md:col-span-7">
                     <h3 className="font-semibold mb-3">Daftar Pengajuan</h3>
                     <Table
-                      columns=[
+                      columns={[
                         {key:'id', header:'ID'},
                         {key:'submitted', header:'Tanggal Ajukan'},
                         {key:'amount', header:'Amount', render:(v)=>formatRp(v)},
                         {key:'eta', header:'Estimasi Cair'},
                         {key:'status', header:'Status'},
-                      ]
+                      ]}
                       data={payouts.filter(p=>p.reseller!=='Siti A' || true)}
                     />
                   </Card>
@@ -381,7 +381,7 @@ export default function Dashboard(){
                     </div>
                   </div>
                   <Table
-                    columns=[
+                    columns={[
                       {key:'id', header:'ID'},
                       {key:'reseller', header:'Reseller'},
                       {key:'amount', header:'Amount', render:(v)=>formatRp(v)},
@@ -396,7 +396,7 @@ export default function Dashboard(){
                           <Button size="sm" variant="tertiary">Reject</Button>
                         </div>
                       ) : '-'},
-                    ]
+                    ]}
                     data={payouts}
                   />
                 </Card>
@@ -410,11 +410,11 @@ export default function Dashboard(){
                   <Button><Plus className="h-4 w-4" /> Tambah Produk</Button>
                 </div>
                 <Table
-                  columns=[
+                  columns={[
                     {key:'name', header:'Produk'},
                     {key:'price', header:'Harga', render:(v,row)=> `${formatRp(row.price)}/${row.cycle}`},
                     {key:'action', header:'Aksi', render:()=> <Button size="sm" variant="secondary">Edit</Button> },
-                  ]
+                  ]}
                   data={products}
                 />
               </Card>
@@ -469,13 +469,13 @@ export default function Dashboard(){
                 </div>
                 <div className="mt-4">
                   <Table
-                    columns=[
+                    columns={[
                       {key:'time', header:'Waktu'},
                       {key:'cat', header:'Kategori'},
                       {key:'actor', header:'Aktor'},
                       {key:'desc', header:'Deskripsi'},
                       {key:'ref', header:'Terkait'},
-                    ]
+                    ]}
                     data={logs}
                   />
                 </div>
