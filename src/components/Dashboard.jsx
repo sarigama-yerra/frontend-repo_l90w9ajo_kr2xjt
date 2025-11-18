@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import Spline from '@splinetool/react-spline'
 import { Search, Bell, Menu, ChevronDown, Download, Plus, Settings, Banknote, Wallet2, LineChart, Activity, Server, Clock, Zap, CheckCircle2 } from 'lucide-react'
 import { Button, Badge, Card, Input, Select, Toggle, Table, Modal, Drawer, Toast, cx } from './UI'
 
@@ -85,35 +84,32 @@ export default function Dashboard(){
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#F7F2FA,white)] text-slate-900">
-      <div className="relative h-[88px] sm:h-[120px] md:h-[160px]">
-        <Spline scene="https://prod.spline.design/8nsoLg1te84JZcE9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        <div className="absolute inset-0" style={{background:'linear-gradient(180deg, rgba(247,242,250,0.9) 0%, rgba(247,242,250,0.85) 50%, rgba(255,255,255,1) 100%)'}} />
-        <header className="absolute top-0 left-0 right-0 p-2 md:p-4">
-          <div className="mx-auto max-w-[1280px] flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <button className="p-2 md:hidden" aria-label="Toggle Sidebar" onClick={()=>setSidebarOpen(s=>!s)}><Menu /></button>
-              <div className="font-extrabold text-base md:text-xl tracking-tight text-[#F24AA7]">DigitalPay</div>
-              <Badge color="role" className="hidden sm:inline-flex">{role}</Badge>
+      {/* Compact, sticky header at exactly 76px */}
+      <header className="sticky top-0 z-40 h-[76px] bg-[linear-gradient(180deg,rgba(247,242,250,0.96)_0%,rgba(255,255,255,0.96)_100%)] backdrop-blur border-b border-[#ECDFF2]">
+        <div className="h-full mx-auto max-w-[1280px] px-3 md:px-6 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <button className="p-2 md:hidden" aria-label="Toggle Sidebar" onClick={()=>setSidebarOpen(s=>!s)}><Menu /></button>
+            <div className="font-extrabold text-lg md:text-xl tracking-tight text-[#F24AA7]">DigitalPay</div>
+            <Badge color="role" className="hidden sm:inline-flex">{role}</Badge>
+          </div>
+          <div className="hidden md:flex items-center gap-3 w-[560px]">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" aria-hidden />
+              <Input placeholder="Cari transaksi, produk, pengguna..." className="pl-9" aria-label="Search" />
             </div>
-            <div className="hidden md:flex items-center gap-3 w-[560px]">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" aria-hidden />
-                <Input placeholder="Cari transaksi, produk, pengguna..." className="pl-9" aria-label="Search" />
-              </div>
-              <Button variant="secondary" aria-label="Notifications"><Bell className="h-4 w-4" /></Button>
-              <div className="flex items-center gap-2 px-2 py-1.5 bg-[#F7F2FA] border border-[#ECDFF2] rounded-2xl">
-                <div className="h-7 w-7 rounded-full" style={{background:'linear-gradient(135deg,#F24AA7,#A9D5F9)'}} aria-hidden />
-                <span className="text-sm">Akun</span>
-                <ChevronDown className="h-4 w-4" aria-hidden />
-              </div>
+            <Button variant="secondary" aria-label="Notifications"><Bell className="h-4 w-4" /></Button>
+            <div className="flex items-center gap-2 px-2 py-1.5 bg-[#F7F2FA] border border-[#ECDFF2] rounded-2xl">
+              <div className="h-7 w-7 rounded-full" style={{background:'linear-gradient(135deg,#F24AA7,#A9D5F9)'}} aria-hidden />
+              <span className="text-sm">Akun</span>
+              <ChevronDown className="h-4 w-4" aria-hidden />
             </div>
           </div>
-        </header>
-      </div>
+        </div>
+      </header>
 
-      <div className="mx-auto max-w-[1280px] px-4 md:px-6 -mt-8 md:-mt-12 pb-24">
-        {/* Compact toolbar below header to avoid oversized navbar */}
-        <div className="mb-3 flex flex-wrap items-center gap-3 justify-between">
+      {/* Toolbar under header */}
+      <div className="mx-auto max-w-[1280px] px-4 md:px-6 pt-4 pb-2">
+        <div className="flex flex-wrap items-center gap-3 justify-between">
           <div className="flex items-center gap-3">
             <span className="text-slate-600">Peran:</span>
             <Select value={role} onChange={e=>setRole(e.target.value)} aria-label="Role Switcher">
@@ -121,7 +117,6 @@ export default function Dashboard(){
             </Select>
             <Badge color="default" className="hidden sm:inline-flex">Prototype — sections berubah sesuai role</Badge>
           </div>
-          {/* Quick search for small screens */}
           <div className="flex items-center gap-2 w-full sm:w-auto sm:hidden">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" aria-hidden />
@@ -130,10 +125,11 @@ export default function Dashboard(){
             <Button variant="secondary" aria-label="Notifications"><Bell className="h-4 w-4" /></Button>
           </div>
         </div>
+      </div>
 
+      <div className="mx-auto max-w-[1280px] px-4 md:px-6 pb-24">
         <div className="flex gap-6">
-          <aside className={cx('hidden md:block w-64 flex-shrink-0')}
-            aria-label="Sidebar">
+          <aside className={cx('hidden md:block w-64 flex-shrink-0')} aria-label="Sidebar">
             <Card variant="bento" tone="cream" className="p-2">
               {navItems.filter(i=>i.roles.includes(role)).map(i => (
                 <button key={i.key} onClick={()=>setCurrent(i.key)}
